@@ -1,9 +1,7 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+	<view>
+		<u-swiper :list="swiper_list"></u-swiper>
+		<button @click="test">btn</button>
 	</view>
 </template>
 
@@ -11,19 +9,26 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				swiper_list: [ //
+					{
+						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg'
+					}
+				]
 			}
 		},
-		onLoad() {
-
-		},
 		methods: {
-
+			test: function() {
+				let url = '/pages/page2/page2'
+				console.log(url);
+				uni.switchTab({
+					url: url
+				})
+			}
 		}
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 	.content {
 		display: flex;
 		flex-direction: column;

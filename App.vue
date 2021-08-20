@@ -1,17 +1,15 @@
-<script>
-	export default {
-		onLaunch: function() {
-			console.log('App Launch')
-		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
+<style lang="scss">
+	.uni-top-window {
+		uni-tabbar {
+			.uni-tabbar {
+				background-color: #fff !important;
+			}
 		}
 	}
-</script>
 
-<style>
-	/*每个页面公共css */
+	.uni-app--showtopwindow {
+		uni-page-head {
+			display: none;
+		}
+	}
 </style>
