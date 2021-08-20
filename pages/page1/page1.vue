@@ -1,83 +1,25 @@
 <template>
-			<view class="u-demo-area">
+	<view class="content">
+		<u-toast ref="uToast" />
+		<swiper>
+			<swiper-item>
 				<u-grid>
-					<u-grid-item name="item1" :index="10" @click="handle_grid_item_click">
-						<u-icon name="photo" size="46"></u-icon>
-						<text class="grid-text">图片</text>
-					</u-grid-item>
-					<u-grid-item :index="1">
-						<u-icon name="lock" :size="46"></u-icon>
-						<view class="grid-text">锁头</view>
-					</u-grid-item>
-					<u-grid-item :index="2">
-						<image src="https://cdn.uviewui.com/uview/grid/hot5.png" :style="{
-							top: col == 3 ? '14rpx' : '8rpx',
-							right: col == 3 ? '40rpx' : '28rpx'
-						}" style="width: 34rpx;height: 34rpx;" class="badge-icon" mode="widthFix"></image>
-						<u-icon name="hourglass" :size="46"></u-icon>
-						<view class="grid-text">沙漏</view>
-					</u-grid-item>
-					<u-grid-item :index="3">
-						<u-icon name="home" :size="46"></u-icon>
-						<view class="grid-text">首页</view>
-					</u-grid-item>
-					<u-grid-item :index="4">
-						<u-icon name="star" :size="46"></u-icon>
-						<view class="grid-text">星星</view>
-					</u-grid-item>
-					<u-grid-item :index="5">
-						<u-icon name="volume-up" :size="46"></u-icon>
-						<view class="grid-text">音量</view>
-					</u-grid-item>
-					<u-grid-item :index="6">
-						<image src="https://cdn.uviewui.com/uview/grid/hot6.png"
-							style="width: 44rpx;height: 44rpx;top:0;right:0;" class="badge-icon"></image>
-						<u-icon name="trash" :size="46"></u-icon>
-						<view class="grid-text">回收站</view>
-					</u-grid-item>
-					<u-grid-item :index="7">
-						<u-icon name="rewind-right" :size="46"></u-icon>
-						<view class="grid-text">快进</view>
-					</u-grid-item>
-					<u-grid-item :index="8">
-						<u-icon name="shopping-cart" :size="46"></u-icon>
-						<view class="grid-text">购物车</view>
+					<u-grid-item v-for="(item, index) in list" :index="index" :key="index"
+						@click="handle_grid_item_click">
+						<u-icon :name="item" :size="46"></u-icon>
+						<text>{{ '宫格' + (index + 1) }}</text>
 					</u-grid-item>
 				</u-grid>
-				<swiper class="swiper" @change="change">
-					<swiper-item>
-						<u-grid :border="border" :col="col" @click="click" hover-class="hover-class">
-							<u-grid-item v-for="(item, index) in list" :index="index" :key="index">
-								<u-icon :name="item" :size="46"></u-icon>
-								<text class="grid-text">{{ '宫格' + (index + 1) }}</text>
-							</u-grid-item>
-						</u-grid>
-					</swiper-item>
-					<swiper-item>
-						<u-grid :border="border" :col="col" @click="click">
-							<u-grid-item v-for="(item, index) in list" :index="index + 9" :key="index">
-								<u-icon :name="item" :size="46"></u-icon>
-								<text class="grid-text">{{ '宫格' + (index + 1) }}</text>
-							</u-grid-item>
-						</u-grid>
-					</swiper-item>
-					<swiper-item>
-						<u-grid :border="border" :col="col" @click="click">
-							<u-grid-item v-for="(item, index) in list" :index="index + 18" :key="index">
-								<u-icon :name="item" :size="46"></u-icon>
-								<text class="grid-text">{{ '宫格' + (index + 1) }}</text>
-							</u-grid-item>
-						</u-grid>
-					</swiper-item>
-				</swiper>
-			</view>
+			</swiper-item>
+		</swiper>
+	</view>
 </template>
 
 <script>
 	export default {
 		data() {
 			return {
-				list: ['integral', 'kefu-ermai', 'coupon', 'gift', 'scan', 'pause-circle', 'wifi', 'email', 'list'],
+				grid_list: ['integral', 'kefu-ermai', 'coupon', 'gift', 'scan', 'pause-circle', 'wifi', 'email', 'list'],
 				isSwiper: false,
 				current: 0,
 				border: true,
@@ -85,27 +27,11 @@
 			};
 		},
 		methods: {
-			isSwiperChange(index) {
-				this.isSwiper = index == 0 ? true : false;
-			},
-			borderChange(index) {
-				this.border = index == 0 ? true : false;
-			},
-			colChange(index) {
-				this.col = index == 0 ? 3 : 4;
-			},
-			handle_grid_click(index) {
-				this.$refs.uToast.show({
-					title: `点击了第${index + 1}宫格`,
-					type: 'warning'
-				})
-			},
-			change(e) {
-				this.current = e.detail.current;
-			},
-			// 针对单个grid-item的事件
 			handle_grid_item_click(index) {
-				// console.log(index);
+				this.$refs.uToast.show({
+					title: index,
+					icon: false
+				})
 			}
 		}
 	};
